@@ -19,6 +19,7 @@ build/
 # Output files
 outputs/
 *.csv.bak
+# *_interactive.html  # Commented out - needed for GitHub Pages
 
 # IDE
 .vscode/

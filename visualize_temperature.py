@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import os
 
 # Configuration
-INPUT_FILE = "digby_temperature_2023-2025.csv"
+INPUT_FILE = "digby_temperature_2020-2025.csv"
 OUTPUT_PLOT = "digby_temperature_plot.png"
 
 # Check if data file exists

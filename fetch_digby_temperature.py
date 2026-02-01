@@ -30,9 +30,9 @@ print("API key loaded successfully!")
 # Configuration
 BASE_URL = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx"
 LOCATION = "Digby,Nova Scotia,Canada"
-START_YEAR = 2023
+START_YEAR = 2020
 END_YEAR = 2025
-OUTPUT_FILE = "digby_temperature_2023-2025.csv"
+OUTPUT_FILE = "digby_temperature_2020-2025.csv"I
 
 print(f"Location: {LOCATION}")
 print(f"Time range: {START_YEAR} - {END_YEAR}")
