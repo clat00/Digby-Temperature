@@ -65,6 +65,9 @@ for idx, year in enumerate(sorted(df['year'].unique())):
         opacity=0.8
     ))
 
+# Get the number of years for button visibility toggles
+num_years = len(df['year'].unique())
+
 # Update layout
 fig.update_layout(
     title={
@@ -102,14 +105,86 @@ fig.update_layout(
         showgrid=True,
         gridcolor='lightgray',
         gridwidth=0.5
-    )
+    ),
 )
 
-# Save as HTML
-fig.write_html(OUTPUT_HTML)
+# Generate HTML with custom toggle button
+html_content = fig.to_html(full_html=True, include_plotlyjs=True, div_id="temperature-chart")
+
+# Custom CSS and JavaScript for toggle button positioned relative to chart
+toggle_style = '''
+<style>
+    #chart-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+    #toggle-btn {
+        position: absolute;
+        top: 55px;
+        right: 15px;
+        z-index: 1000;
+        background-color: white;
+        border: 1px solid gray;
+        border-radius: 4px;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-family: "Open Sans", verdana, arial, sans-serif;
+        font-size: 12px;
+    }
+    #toggle-btn:hover {
+        background-color: #f0f0f0;
+    }
+</style>
+'''
+
+toggle_script = f'''
+<script>
+    (function() {{
+        // Wrap the chart in a container for relative positioning
+        var chartDiv = document.getElementById('temperature-chart');
+        var wrapper = document.createElement('div');
+        wrapper.id = 'chart-wrapper';
+        chartDiv.parentNode.insertBefore(wrapper, chartDiv);
+        wrapper.appendChild(chartDiv);
+        
+        // Create the toggle button
+        var btn = document.createElement('button');
+        btn.id = 'toggle-btn';
+        btn.textContent = 'Hide All Years';
+        wrapper.appendChild(btn);
+        
+        var allVisible = true;
+        var numYears = {num_years};
+        
+        btn.addEventListener('click', function() {{
+            if (allVisible) {{
+                var update = {{'visible': Array(numYears).fill('legendonly')}};
+                Plotly.restyle(chartDiv, update);
+                btn.textContent = 'Show All Years';
+                allVisible = false;
+            }} else {{
+                var update = {{'visible': Array(numYears).fill(true)}};
+                Plotly.restyle(chartDiv, update);
+                btn.textContent = 'Hide All Years';
+                allVisible = true;
+            }}
+        }});
+    }})();
+</script>
+'''
+
+# Insert styles in head and script before closing body
+html_content = html_content.replace('</head>', toggle_style + '</head>')
+html_content = html_content.replace('</body>', toggle_script + '</body>')
+
+# Write the final HTML
+with open(OUTPUT_HTML, 'w') as f:
+    f.write(html_content)
+
 print(f"✓ Interactive plot saved to {OUTPUT_HTML}")
 print(f"✓ Open the HTML file in your browser to interact with the chart")
-print(f"   - Click legend items to show/hide years")
+print(f"   - Click the toggle button to show/hide all years with one click")
+print(f"   - Click legend items to show/hide individual years")
 print(f"   - Double-click a legend item to isolate that year")
 print(f"   - Hover over lines to see exact dates and temperatures")
 
