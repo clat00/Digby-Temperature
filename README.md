@@ -95,7 +95,13 @@ This creates an interactive chart where you can:
 - Hover over lines to see exact dates and temperatures
 - Zoom, pan, and export the chart
 
-Open the generated HTML file in any web browser to interact with it.
+Generate interactive wind charts (monthly average speed and peak gusts):
+
+```bash
+python3 plot_interactive_wind.py
+```
+
+Open the generated HTML files in any web browser to interact with them.
 
 ## Output Files
 
@@ -108,6 +114,8 @@ Open the generated HTML file in any web browser to interact with it.
 - `yearly_high_low_average.png` - Average high/low temperatures across the year
 - `digby_wind_speed.png` - Wind speed over time and monthly averages
 - `digby_wind_rose.png` - Wind direction frequency (wind rose diagram)
+- `digby_wind_speed_interactive.html` - Monthly average wind speed by year (interactive)
+- `digby_wind_gusts_interactive.html` - Peak wind gusts by year (interactive)
 
 ## Data Included
 
