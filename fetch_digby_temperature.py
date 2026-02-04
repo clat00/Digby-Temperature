@@ -32,7 +32,7 @@ BASE_URL = "https://api.worldweatheronline.com/premium/v1/past-weather.ashx"
 LOCATION = "Digby,Nova Scotia,Canada"
 START_YEAR = 2020
 END_YEAR = 2025
-OUTPUT_FILE = "digby_temperature_2020-2025.csv"I
+OUTPUT_FILE = "digby_temperature_2020-2025.csv"
 
 print(f"Location: {LOCATION}")
 print(f"Time range: {START_YEAR} - {END_YEAR}")
@@ -109,6 +109,13 @@ for year in range(START_YEAR, END_YEAR + 1):
         if month_data:
             # Extract daily records
             for day in month_data:
+                # Get hourly data for wind averages (if available)
+                hourly = day.get('hourly', [{}])
+                
+                # Calculate average wind speed from hourly data
+                wind_speeds = [float(h.get('windspeedKmph', 0)) for h in hourly if h.get('windspeedKmph')]
+                avg_wind_speed = sum(wind_speeds) / len(wind_speeds) if wind_speeds else 0
+                
                 record = {
                     'date': day['date'],
                     'max_temp_c': int(day['maxtempC']),
@@ -118,7 +125,10 @@ for year in range(START_YEAR, END_YEAR + 1):
                     'avg_temp_c': (int(day['maxtempC']) + int(day['mintempC'])) / 2,
                     'avg_temp_f': (int(day['maxtempF']) + int(day['mintempF'])) / 2,
                     'uv_index': day.get('uvIndex', ''),
-                    'sun_hour': day.get('sunHour', '')
+                    'sun_hour': day.get('sunHour', ''),
+                    'wind_speed_kmph': round(avg_wind_speed, 1),
+                    'wind_direction': hourly[0].get('winddir16Point', '') if hourly else '',
+                    'wind_gust_kmph': float(hourly[0].get('WindGustKmph', 0)) if hourly and hourly[0].get('WindGustKmph') else 0
                 }
                 all_records.append(record)
         

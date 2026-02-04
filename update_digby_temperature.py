@@ -137,6 +137,13 @@ for year, month in months_to_fetch:
             
             # Only include dates after our last recorded date and up to today
             if day_date >= start_date.date() and day_date <= today:
+                # Get hourly data for wind averages (if available)
+                hourly = day.get('hourly', [{}])
+                
+                # Calculate average wind speed from hourly data
+                wind_speeds = [float(h.get('windspeedKmph', 0)) for h in hourly if h.get('windspeedKmph')]
+                avg_wind_speed = sum(wind_speeds) / len(wind_speeds) if wind_speeds else 0
+                
                 record = {
                     'date': day['date'],
                     'max_temp_c': int(day['maxtempC']),
@@ -146,7 +153,10 @@ for year, month in months_to_fetch:
                     'avg_temp_c': (int(day['maxtempC']) + int(day['mintempC'])) / 2,
                     'avg_temp_f': (int(day['maxtempF']) + int(day['mintempF'])) / 2,
                     'uv_index': day.get('uvIndex', ''),
-                    'sun_hour': day.get('sunHour', '')
+                    'sun_hour': day.get('sunHour', ''),
+                    'wind_speed_kmph': round(avg_wind_speed, 1),
+                    'wind_direction': hourly[0].get('winddir16Point', '') if hourly else '',
+                    'wind_gust_kmph': float(hourly[0].get('WindGustKmph', 0)) if hourly and hourly[0].get('WindGustKmph') else 0
                 }
                 new_records.append(record)
     

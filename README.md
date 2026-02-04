@@ -70,6 +70,17 @@ Generate a plot showing average high/low temperatures for each day of the year:
 python3 plot_yearly_high_low_average.py
 ```
 
+Generate wind speed and wind direction visualizations:
+
+```bash
+python3 visualize_wind.py
+```
+
+This creates:
+- Wind speed over time with 30-day rolling average
+- Monthly average wind speed by year
+- Wind rose diagram showing prevailing wind directions
+
 #### Interactive Visualizations
 
 Generate an interactive HTML chart for year-by-year temperature comparison:
@@ -88,13 +99,15 @@ Open the generated HTML file in any web browser to interact with it.
 
 ## Output Files
 
-- `digby_temperature_2020-2025.csv` - Daily temperature data
+- `digby_temperature_2020-2025.csv` - Daily temperature and wind data
 - `digby_temperature_plot.png` - Temperature visualization (all years)
 - `digby_temperature_by_year.png` - Year-by-year comparison (static)
 - `digby_temperature_by_year_interactive.html` - Year-by-year comparison (interactive)
 - `march_vs_november_comparison.png` - Seasonal comparison (March vs November)
 - `monthly_average_temperature.png` - Average temperature by day of year
 - `yearly_high_low_average.png` - Average high/low temperatures across the year
+- `digby_wind_speed.png` - Wind speed over time and monthly averages
+- `digby_wind_rose.png` - Wind direction frequency (wind rose diagram)
 
 ## Data Included
 
@@ -105,6 +118,9 @@ Each day includes:
 - Average temperature (°C and °F)
 - UV index
 - Sun hours
+- Wind speed (km/h)
+- Wind direction (16-point compass)
+- Wind gust speed (km/h)
 
 ## Project Files
 
