@@ -1,6 +1,6 @@
-# Digby, NS Temperature Data Project
+# Digby, NS Weather Data Project
 
-This project fetches historical daily temperature data for Digby, Nova Scotia from 2020-2025 using the WorldWeatherOnline API.
+This project fetches historical daily temperature and wind data for Digby, Nova Scotia from 2020-2025 using the WorldWeatherOnline API.
 
 ## Setup
 
@@ -25,7 +25,7 @@ python3 fetch_digby_temperature.py
 
 This will:
 - Make ~72 API calls (one per month from Jan 2020 - Dec 2025)
-- Fetch daily max/min temperatures for Digby, NS
+- Fetch daily max/min temperatures and wind data for Digby, NS
 - Save data to `digby_temperature_2020-2025.csv`
 - Generate a temperature visualization as `digby_temperature_plot.png`
 - Display summary statistics
@@ -132,20 +132,29 @@ Each day includes:
 
 ## Project Files
 
+### Core Scripts
 - `.env` - API key configuration (never commit this!)
 - `fetch_digby_temperature.py` - **Initial full dataset fetch** (run once)
 - `update_digby_temperature.py` - **Incremental updates** (run monthly)
+- `requirements.txt` - Python dependencies
+- `.gitignore` - Protects sensitive files
+
+### Temperature Visualizations
 - `visualize_temperature.py` - Generate visualizations from existing data
 - `visualize_by_year.py` - Create year-by-year comparison plots (static PNG)
 - `plot_interactive_by_year.py` - Create interactive year-by-year chart (HTML)
 - `compare_march_november.py` - Compare March vs November temperatures
 - `plot_monthly_average_temp.py` - Plot average temperature by day of year
 - `plot_yearly_high_low_average.py` - Plot average high/low temperatures across the year
+
+### Wind Visualizations
+- `visualize_wind.py` - Generate wind speed charts and wind rose diagram (PNG)
+- `plot_interactive_wind.py` - Create interactive wind charts (HTML)
+
+### Analysis Scripts
 - `analyze_cold_days.py` - Analyze cold temperature patterns
 - `analyze_extreme_cold_days.py` - Analyze extreme cold events
 - `analyze_january_patterns.py` - Analyze January temperature patterns
-- `requirements.txt` - Python dependencies
-- `.gitignore` - Protects sensitive files
 
 ## Workflow Recommendation
 
