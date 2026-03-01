@@ -37,7 +37,9 @@ plt.fill_between(df['date'], df['min_temp_c'], df['max_temp_c'], alpha=0.2, colo
 
 plt.xlabel('Date', fontsize=12)
 plt.ylabel('Temperature (°C)', fontsize=12)
-plt.title('Digby, NS Daily Temperature (2023-2025)', fontsize=14, fontweight='bold')
+year_min = df['date'].dt.year.min()
+year_max = df['date'].dt.year.max()
+plt.title(f'Digby, NS Daily Temperature ({year_min}-{year_max})', fontsize=14, fontweight='bold')
 plt.legend(loc='best', fontsize=11)
 plt.grid(True, alpha=0.3, linestyle='--')
 plt.tight_layout()

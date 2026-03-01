@@ -53,7 +53,9 @@ for idx, year in enumerate(sorted(df['year'].unique())):
 
 plt.xlabel('Day of Year', fontsize=12)
 plt.ylabel('Average Temperature (°C)', fontsize=12)
-plt.title('Digby, NS Daily Temperature by Year (2020-2025)', fontsize=14, fontweight='bold')
+year_min = df['year'].min()
+year_max = df['year'].max()
+plt.title(f'Digby, NS Daily Temperature by Year ({year_min}-{year_max})', fontsize=14, fontweight='bold')
 plt.legend(loc='best', fontsize=11)
 plt.grid(True, alpha=0.3, linestyle='--')
 plt.xlim(1, 366)  # Show full year range
