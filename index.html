@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digby, NS Weather Analysis</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f1117;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1c2e 0%, #2d1f3d 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+
+        header p {
+            color: #9ca3af;
+            font-size: 1.05rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        section h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #c4b5fd;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(196,181,253,0.15);
+        }
+
+        .card {
+            background: #1a1c2e;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: rgba(196,181,253,0.25);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .card-caption {
+            padding: 0.8rem 1.2rem;
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+
+        .interactive-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .interactive-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.2rem 1.4rem;
+            background: #1a1c2e;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .interactive-links a:hover {
+            border-color: rgba(196,181,253,0.35);
+            background: #22243a;
+        }
+
+        .interactive-links .icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .interactive-links .link-label {
+            font-size: 0.82rem;
+            color: #9ca3af;
+            font-weight: 400;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        footer a { color: #9ca3af; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Digby, NS Weather Analysis</h1>
+    <p>Daily temperature and wind data from 2020 to present</p>
+</header>
+
+<div class="container">
+
+    <section>
+        <h2>Interactive Charts</h2>
+        <div class="interactive-links">
+            <a href="digby_temperature_by_year_interactive.html">
+                <span class="icon">&#x1f321;</span>
+                <div>
+                    Temperature by Year
+                    <div class="link-label">Compare yearly temperature patterns</div>
+                </div>
+            </a>
+            <a href="digby_wind_speed_interactive.html">
+                <span class="icon">&#x1f4a8;</span>
+                <div>
+                    Monthly Wind Speed
+                    <div class="link-label">Average wind speed by month and year</div>
+                </div>
+            </a>
+            <a href="digby_wind_gusts_interactive.html">
+                <span class="icon">&#x1f32a;</span>
+                <div>
+                    Peak Wind Gusts
+                    <div class="link-label">Maximum gusts by month and year</div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section>
+        <h2>Temperature</h2>
+        <div class="card">
+            <img src="digby_temperature_plot.png" alt="Daily temperature highs and lows" loading="lazy">
+            <div class="card-caption">Daily maximum and minimum temperatures with range shading</div>
+        </div>
+        <div class="card">
+            <img src="digby_temperature_by_year.png" alt="Temperature comparison by year" loading="lazy">
+            <div class="card-caption">Year-by-year average temperature comparison</div>
+        </div>
+        <div class="card">
+            <img src="monthly_average_temperature.png" alt="Average temperature by day of year" loading="lazy">
+            <div class="card-caption">Average temperature by day of year across all years</div>
+        </div>
+        <div class="card">
+            <img src="yearly_high_low_average.png" alt="Average high and low temperatures" loading="lazy">
+            <div class="card-caption">Average daily high and low temperatures by day of year</div>
+        </div>
+        <div class="card">
+            <img src="march_vs_november_comparison.png" alt="March vs November temperature" loading="lazy">
+            <div class="card-caption">March vs November average temperature comparison</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Wind</h2>
+        <div class="card">
+            <img src="digby_wind_speed.png" alt="Wind speed over time" loading="lazy">
+            <div class="card-caption">Daily wind speed with monthly averages</div>
+        </div>
+        <div class="card">
+            <img src="digby_wind_rose.png" alt="Wind rose" loading="lazy">
+            <div class="card-caption">Wind direction frequency distribution</div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <a href="https://github.com/clat00/Digby-Temperature">View source on GitHub</a>
+</footer>
+
+</body>
+</html>
