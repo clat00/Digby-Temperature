@@ -114,6 +114,17 @@ html_content = fig.to_html(full_html=True, include_plotlyjs=True, div_id="temper
 # Custom CSS and JavaScript for toggle button positioned relative to chart
 toggle_style = '''
 <style>
+    .nav-bar {
+        background: #1a1c2e;
+        padding: 10px 20px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .nav-bar a {
+        color: #c4b5fd;
+        text-decoration: none;
+        font-size: 14px;
+    }
+    .nav-bar a:hover { text-decoration: underline; }
     #chart-wrapper {
         position: relative;
         display: inline-block;
@@ -136,6 +147,9 @@ toggle_style = '''
     }
 </style>
 '''
+
+nav_html = '<div class="nav-bar"><a href="index.html">&larr; Back to Dashboard</a></div>'
+html_content = html_content.replace('<body>', '<body>' + nav_html)
 
 toggle_script = f'''
 <script>

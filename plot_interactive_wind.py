@@ -109,7 +109,18 @@ fig1.update_layout(
     )
 )
 
-fig1.write_html(OUTPUT_WIND_SPEED)
+nav_style = '''<style>
+.nav-bar { background: #1a1c2e; padding: 10px 20px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+.nav-bar a { color: #c4b5fd; text-decoration: none; font-size: 14px; }
+.nav-bar a:hover { text-decoration: underline; }
+</style>'''
+nav_html = '<div class="nav-bar"><a href="index.html">&larr; Back to Dashboard</a></div>'
+
+html1 = fig1.to_html(full_html=True, include_plotlyjs=True)
+html1 = html1.replace('</head>', nav_style + '</head>')
+html1 = html1.replace('<body>', '<body>' + nav_html)
+with open(OUTPUT_WIND_SPEED, 'w') as f:
+    f.write(html1)
 print(f"✓ Monthly wind speed chart saved to {OUTPUT_WIND_SPEED}")
 
 # ===== CHART 2: PEAK WIND GUSTS =====
@@ -184,7 +195,11 @@ fig2.update_layout(
     )
 )
 
-fig2.write_html(OUTPUT_WIND_GUSTS)
+html2 = fig2.to_html(full_html=True, include_plotlyjs=True)
+html2 = html2.replace('</head>', nav_style + '</head>')
+html2 = html2.replace('<body>', '<body>' + nav_html)
+with open(OUTPUT_WIND_GUSTS, 'w') as f:
+    f.write(html2)
 print(f"✓ Peak wind gusts chart saved to {OUTPUT_WIND_GUSTS}")
 
 # Print summary statistics
