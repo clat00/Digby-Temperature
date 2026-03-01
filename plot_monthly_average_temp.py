@@ -50,7 +50,9 @@ plt.fill_between(daily_avg.index, daily_avg.values, alpha=0.3, color='#2E86AB')
 
 plt.xlabel('Month', fontsize=12, fontweight='bold')
 plt.ylabel('Average Temperature (°C)', fontsize=12, fontweight='bold')
-plt.title('Average Temperature by Day of Year - Digby, NS (2020-2025)', 
+year_min = df['date'].dt.year.min()
+year_max = df['date'].dt.year.max()
+plt.title(f'Average Temperature by Day of Year - Digby, NS ({year_min}-{year_max})', 
           fontsize=14, fontweight='bold')
 plt.xticks(month_starts, month_names)
 plt.xlim(1, 365)

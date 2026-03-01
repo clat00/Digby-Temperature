@@ -56,7 +56,9 @@ plt.fill_between(daily_stats['day_of_year'], daily_stats['min_temp_c'],
 
 plt.xlabel('Month', fontsize=12)
 plt.ylabel('Temperature (°C)', fontsize=12)
-plt.title('Average Daily High and Low Temperature by Day of Year - Digby, NS (2020-2025)', 
+year_min = df['date'].dt.year.min()
+year_max = df['date'].dt.year.max()
+plt.title(f'Average Daily High and Low Temperature by Day of Year - Digby, NS ({year_min}-{year_max})', 
           fontsize=14, fontweight='bold')
 plt.legend(loc='best', fontsize=11)
 plt.xticks(month_starts, month_names)
