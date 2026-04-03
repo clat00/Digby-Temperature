@@ -14,11 +14,13 @@ This downloads any new days since the last update and regenerates the static tem
 
 ```bash
 python3 plot_interactive_by_year.py
+python3 plot_interactive_vs_average.py
 python3 plot_interactive_wind.py
 ```
 
-These rebuild the three interactive HTML files served on GitHub Pages:
+These rebuild the four interactive HTML files served on GitHub Pages:
 - `digby_temperature_by_year_interactive.html`
+- `digby_temperature_vs_average_interactive.html`
 - `digby_wind_speed_interactive.html`
 - `digby_wind_gusts_interactive.html`
 
