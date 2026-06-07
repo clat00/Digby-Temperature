@@ -10,15 +10,16 @@ python3 update_digby_temperature.py
 
 This downloads any new days since the last update and regenerates the static temperature plot.
 
-## 2. Regenerate interactive charts
+## 2. Regenerate charts
 
 ```bash
+python3 visualize_wind.py
 python3 plot_interactive_by_year.py
 python3 plot_interactive_vs_average.py
 python3 plot_interactive_wind.py
 ```
 
-These rebuild the four interactive HTML files served on GitHub Pages:
+These rebuild the static wind PNGs and the four interactive HTML files served on GitHub Pages:
 - `digby_temperature_by_year_interactive.html`
 - `digby_temperature_vs_average_interactive.html`
 - `digby_wind_speed_interactive.html`
